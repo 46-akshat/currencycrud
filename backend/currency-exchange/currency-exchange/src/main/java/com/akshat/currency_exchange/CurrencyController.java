@@ -18,7 +18,7 @@ public List<CurrencyRate> getAll(){
 }
 @GetMapping("/{id}")
 public CurrencyRate getByid(@PathVariable Long id){
-    return service.getCurrencyById(id);
+    return service.getById(id);
 }
 
 

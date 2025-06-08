@@ -5,13 +5,12 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Form state
   const [baseCurrency, setBaseCurrency] = useState("");
   const [targetCurrency, setTargetCurrency] = useState("");
   const [rate, setRate] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "http://localhost:8080/api/currencyo";
+  const API_URL = "http://localhost:8080/currency";
 
   useEffect(() => {
     fetchPairs();
@@ -19,7 +18,7 @@ function App() {
 
   function fetchPairs() {
     setLoading(true);
-    fetch(API_URL)
+    fetch(`${API_URL}/all`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch currency pairs");
         return res.json();
@@ -41,7 +40,6 @@ function App() {
     setEditingId(null);
   }
 
-  // Create or Update handler
   function handleSubmit(e) {
     e.preventDefault();
     const pairData = { baseCurrency, targetCurrency, rate: parseFloat(rate) };
@@ -69,10 +67,10 @@ function App() {
         .catch((err) => setError(err.message));
     } else {
       // UPDATE
-      fetch(`${API_URL}/${editingId}`, {
+      fetch(API_URL, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(pairData),
+        body: JSON.stringify({ ...pairData, id: editingId }),
       })
         .then((res) => {
           if (!res.ok) throw new Error("Failed to update pair");
@@ -86,7 +84,6 @@ function App() {
     }
   }
 
-  // Delete handler
   function handleDelete(id) {
     if (!window.confirm("Delete this currency pair?")) return;
 
@@ -98,7 +95,6 @@ function App() {
       .catch((err) => setError(err.message));
   }
 
-  // Edit button handler
   function handleEdit(pair) {
     setBaseCurrency(pair.baseCurrency);
     setTargetCurrency(pair.targetCurrency);
@@ -121,12 +117,22 @@ function App() {
         overflowY: "auto",
       }}
     >
+      <style>{`
+        @media (max-width: 480px) {
+          .action-button {
+            display: block !important;
+            width: 100% !important;
+            margin: 5px 0 !important;
+            min-width: unset !important;
+          }
+        }
+      `}</style>
+
       <h1 style={{ color: "#003366", marginBottom: 20 }}>
-        Currency Exchange 
+        Currency Exchange
       </h1>
 
-      {/* Form */}
-      <form
+      <div
         onSubmit={handleSubmit}
         style={{
           marginBottom: 30,
@@ -166,7 +172,7 @@ function App() {
           required
         />
         <button
-          type="submit"
+          onClick={handleSubmit}
           style={{
             padding: "10px 20px",
             backgroundColor: "#0052cc",
@@ -198,16 +204,14 @@ function App() {
             Cancel
           </button>
         )}
-      </form>
+      </div>
 
-      {/* Error message */}
       {error && (
         <p style={{ color: "red", marginBottom: 10, textAlign: "center" }}>
           {error}
         </p>
       )}
 
-      {/* Loading & List */}
       {loading ? (
         <p>Loading currency pairs...</p>
       ) : pairs.length === 0 ? (
@@ -234,22 +238,23 @@ function App() {
                 <th style={{ padding: 12 }}>Base Currency</th>
                 <th style={{ padding: 12 }}>Target Currency</th>
                 <th style={{ padding: 12 }}>Rate</th>
-                <th style={{ padding: 12 }}>Actions</th>
+                <th style={{ padding: 12, minWidth: 140 }}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {pairs.map((pair) => (
-                <tr
-                  key={pair.id}
-                  style={{ borderBottom: "1px solid #ddd" }}
-                >
+                <tr key={pair.id} style={{ borderBottom: "1px solid #ddd" }}>
                   <td style={{ padding: 12 }}>{pair.baseCurrency}</td>
                   <td style={{ padding: 12 }}>{pair.targetCurrency}</td>
                   <td style={{ padding: 12 }}>{pair.rate}</td>
-                  <td style={{ padding: 12 }}>
+                  <td
+                    style={{ padding: 12, minWidth: 140, whiteSpace: "nowrap" }}
+                  >
                     <button
                       onClick={() => handleEdit(pair)}
+                      className="action-button"
                       style={{
+                        minWidth: 60,
                         marginRight: 10,
                         padding: "6px 12px",
                         backgroundColor: "#0052cc",
@@ -263,7 +268,9 @@ function App() {
                     </button>
                     <button
                       onClick={() => handleDelete(pair.id)}
+                      className="action-button"
                       style={{
+                        minWidth: 60,
                         padding: "6px 12px",
                         backgroundColor: "#cc0000",
                         color: "white",

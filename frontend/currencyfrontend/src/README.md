@@ -50,11 +50,7 @@ A simple Currency CRUD (Create, Read, Update, Delete) application to manage curr
 
 > **Note:** Some backend endpoints are still under development.
 
-## Planned Improvements
-
-- Complete backend CRUD endpoints  
-- Connect backend fully with database  
-- Add validation and error handling  
+ 
 
 ---
 

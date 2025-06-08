@@ -7,7 +7,7 @@ A simple Currency CRUD (Create, Read, Update, Delete) application to manage curr
 
 - **Frontend:** Completed and fully functional  
 - **Backend:** Partially implemented, some endpoints missing or incomplete  
-- **Database:** Not fully integrated yet (or mention your DB status)
+- **Database:** Not fully integrated yet
 
 ## Features
 
@@ -16,7 +16,7 @@ A simple Currency CRUD (Create, Read, Update, Delete) application to manage curr
 
 ## Tech Stack
 
-- Frontend: React (or your frontend tech)  
+- Frontend: React   
 - Backend: Java Spring Boot (partial)  
 
 ## How to Run

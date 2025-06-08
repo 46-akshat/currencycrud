@@ -1,3 +1,4 @@
+
 package com.akshat.currency_exchange;
 
 import com.akshat.currency_exchange.model.CurrencyRate;
@@ -9,32 +10,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/currency")
+@CrossOrigin(origins = "http://localhost:5173")
 public class CurrencyController {
-@Autowired
+
+    @Autowired
     private CurrencyService service;
-@GetMapping("all")
-public List<CurrencyRate> getAll(){
-    return service.getAllPairs();
-}
-@GetMapping("/{id}")
-public CurrencyRate getByid(@PathVariable Long id){
-    return service.getById(id);
-}
 
+    @GetMapping("/all")
+    public List<CurrencyRate> getAll() {
+        return service.getAllPairs();
+    }
 
-@PostMapping("add")
-    public CurrencyRate add(@RequestBody CurrencyRate rate){
-    return service.add(rate);
-}
-@PutMapping("add")
-public CurrencyRate updateCurrency(@RequestBody CurrencyRate rate){
-     return service.updateCurrency(rate);
-}
-@DeleteMapping("/{id}")
+    @GetMapping("/{id}")
+    public CurrencyRate getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
 
-public String deleteCurrency(@PathVariable Long id){
-    return service.deleteidbycurrency(id);
-}
+    @PostMapping("")
+    public CurrencyRate add(@RequestBody CurrencyRate rate) {
+        System.out.println("Received: " + rate); // Debugging line
+        return service.add(rate);
+    }
 
+    @PutMapping("")
+    public CurrencyRate update(@RequestBody CurrencyRate rate) {
+        return service.updateCurrency(rate);
+    }
 
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        return service.deleteCurrencyById(id);
+    }
 }

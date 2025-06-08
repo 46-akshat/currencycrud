@@ -11,7 +11,7 @@ function App() {
   const [rate, setRate] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "http://localhost:8080/api/currency-pairs";
+  const API_URL = "http://localhost:8080/api/currencyo";
 
   useEffect(() => {
     fetchPairs();

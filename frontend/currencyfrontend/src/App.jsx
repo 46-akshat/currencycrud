@@ -243,10 +243,10 @@ function App() {
             </thead>
             <tbody>
               {pairs.map((pair) => (
-                <tr key={pair.id} style={{ borderBottom: "1px solid #ddd" }}>
-                  <td style={{ padding: 12 }}>{pair.baseCurrency}</td>
-                  <td style={{ padding: 12 }}>{pair.targetCurrency}</td>
-                  <td style={{ padding: 12 }}>{pair.rate}</td>
+                <tr key={pair.id} style={{ borderBottom: "1px solid #ddd", color: "#333" }}>
+                  <td style={{ padding: 12, color: "#333" }}>{pair.baseCurrency}</td>
+                  <td style={{ padding: 12, color: "#333" }}>{pair.targetCurrency}</td>
+                  <td style={{ padding: 12, color: "#333" }}>{pair.rate}</td>
                   <td
                     style={{ padding: 12, minWidth: 140, whiteSpace: "nowrap" }}
                   >

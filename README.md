@@ -6,18 +6,18 @@ A simple Currency CRUD (Create, Read, Update, Delete) application to manage curr
 ## Current Status
 
 - **Frontend:** Completed and fully functional  
-- **Backend:** Partially implemented, some endpoints missing or incomplete  
-- **Database:** Not fully integrated yet 
+- **Backend:**Completed and fully functional
+- **Database:**  Integrated 
 
 ## Features
 
 - Add, view, update, and delete currency exchange rates (frontend ready)  
-- Backend APIs partially available  
+- Backend APIs available
 
 ## Tech Stack
 
 - Frontend: React   
-- Backend: Java Spring Boot (partial)  
+- Backend: Java Spring Boot 
 
 ## How to Run
 
@@ -48,13 +48,8 @@ A simple Currency CRUD (Create, Read, Update, Delete) application to manage curr
 
 2. Backend API runs at `http://localhost:8080`
 
-> **Note:** Some backend endpoints are still under development.
 
-## Planned Improvements
 
-- Complete backend CRUD endpoints  
-- Connect backend fully with database  
-- Add validation and error handling  
 
 ---
 

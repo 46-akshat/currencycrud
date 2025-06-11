@@ -1,14 +1,16 @@
-# Use lightweight OpenJDK base image
+# Stage 1: Build the application
+FROM maven:3.9.3-eclipse-temurin-17 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run the application
 FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/currency-exchange-0.0.1-SNAPSHOT.jar app.jar
 
-# Set application JAR file path (replace if needed)
-ARG JAR_FILE=target/currency-exchange-0.0.1-SNAPSHOT.jar
-
-# Copy JAR into the container
-COPY ${JAR_FILE} app.jar
-
-# Expose default Spring Boot port
+# Expose Spring Boot default port
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

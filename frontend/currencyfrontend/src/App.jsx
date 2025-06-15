@@ -10,7 +10,7 @@ function App() {
   const [rate, setRate] = useState("");
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = "https://currencycrud-4.onrender.com/";
+  const API_URL = "https://currencycrud-4.onrender.com/currency";
 
   useEffect(() => {
     fetchPairs();
